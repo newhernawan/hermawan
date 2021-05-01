@@ -1,0 +1,1 @@
+var timers={};async function fireTimeout(a){self.postMessage({id:a}),delete timers[a]}self.addEventListener("message",async function(d){var e=d.data;switch(e.command){case"setTimeout":var a=parseInt(e.timeout||0,10),b=setTimeout(fireTimeout.bind(null,e.id),a);timers[e.id]=b;break;case"clearTimeout":var b=timers[e.id];b&&clearTimeout(b),delete timers[e.id];}});
